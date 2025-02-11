@@ -46,26 +46,26 @@ fun LiveClassScreen() {
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         item {
             PodcastCarousel(
                 title = "Popular Podcasts",
-                items = carousel1Items
+                items = carousel1Items,
             )
         }
 
         item {
             PodcastCarousel(
                 title = "New Releases",
-                items = carousel2Items
+                items = carousel2Items,
             )
         }
 
         item {
             PodcastCarousel(
                 title = "Recommended for You",
-                items = carousel3Items
+                items = carousel3Items,
             )
         }
 
@@ -76,7 +76,10 @@ fun LiveClassScreen() {
 }
 
 @Composable
-private fun PodcastCarousel(title: String, items: List<Int>) {
+private fun PodcastCarousel(
+    title: String,
+    items: List<Int>,
+) {
     val listState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
 
@@ -95,7 +98,7 @@ private fun PodcastCarousel(title: String, items: List<Int>) {
         Text(
             text = title,
             style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.padding(horizontal = 16.dp)
+            modifier = Modifier.padding(horizontal = 16.dp),
         )
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -103,7 +106,7 @@ private fun PodcastCarousel(title: String, items: List<Int>) {
         LazyRow(
             state = listState,
             contentPadding = PaddingValues(horizontal = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             items(items) { index ->
                 PodcastCarouselItem(index = index)
@@ -116,25 +119,28 @@ private fun PodcastCarousel(title: String, items: List<Int>) {
 private fun PodcastCarouselItem(index: Int) {
     Card(
         shape = RoundedCornerShape(8.dp),
-        modifier = Modifier
-            .size(150.dp, 200.dp)
-            .clickable(
-                interactionSource = remember { MutableInteractionSource() },
-                indication = LocalIndication.current
-            ) {
-                // add event left
-            }
+        modifier =
+            Modifier
+                .size(150.dp, 200.dp)
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = LocalIndication.current,
+                ) {
+                    // add event left
+                },
     ) {
         AsyncImage(
-            model = ImageRequest.Builder(LocalContext.current)
-                .data("https://picsum.photos/150/200?podcast$index")
-                .crossfade(true)
-                .build(),
+            model =
+                ImageRequest
+                    .Builder(LocalContext.current)
+                    .data("https://picsum.photos/150/200?podcast$index")
+                    .crossfade(true)
+                    .build(),
             contentDescription = "Podcast Cover",
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize(),
             placeholder = painterResource(R.drawable.ic_launcher_background),
-            error = painterResource(R.drawable.ic_launcher_background)
+            error = painterResource(R.drawable.ic_launcher_background),
         )
     }
 }
@@ -142,42 +148,46 @@ private fun PodcastCarouselItem(index: Int) {
 @Composable
 private fun PodcastListItem(index: Int) {
     Row(
-        modifier = Modifier
-            .clickable(
-                interactionSource = remember { MutableInteractionSource() },
-                indication = LocalIndication.current
-            ) {
-                // add event here
-            }
-            .padding(8.dp)
-            .fillMaxWidth()
+        modifier =
+            Modifier
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = LocalIndication.current,
+                ) {
+                    // add event here
+                }.padding(8.dp)
+                .fillMaxWidth(),
     ) {
         AsyncImage(
-            model = ImageRequest.Builder(LocalContext.current)
-                .data("https://picsum.photos/50/50?item$index")
-                .crossfade(true)
-                .build(),
+            model =
+                ImageRequest
+                    .Builder(LocalContext.current)
+                    .data("https://picsum.photos/50/50?item$index")
+                    .crossfade(true)
+                    .build(),
             contentDescription = "Podcast Thumbnail",
-            modifier = Modifier.size(width =  80.dp, height = 100.dp)
-                .clip(RoundedCornerShape(8.dp)),
+            modifier =
+                Modifier
+                    .size(width = 100.dp, height = 100.dp)
+                    .clip(RoundedCornerShape(8.dp)),
             contentScale = ContentScale.Crop,
             placeholder = painterResource(R.drawable.ic_launcher_background),
-            error = painterResource(R.drawable.ic_launcher_background)
+            error = painterResource(R.drawable.ic_launcher_background),
         )
 
         Spacer(modifier = Modifier.width(16.dp))
 
         Column(
             modifier = Modifier.fillMaxHeight(),
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Center,
         ) {
             Text(
                 text = "Podcast Episode $index",
-                style = MaterialTheme.typography.titleSmall
+                style = MaterialTheme.typography.titleSmall,
             )
             Text(
                 text = "Author Name • ${index * 15} min",
-                style = MaterialTheme.typography.bodySmall
+                style = MaterialTheme.typography.bodySmall,
             )
         }
     }

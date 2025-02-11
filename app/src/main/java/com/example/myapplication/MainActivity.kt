@@ -37,8 +37,9 @@ fun TabScreen() {
     val tabs = listOf("Syllabus", "Live Class", "Videos", "Notes", "Saved Contents")
     var selectedTabIndex by remember { mutableIntStateOf(0) }
 
-    val insets = WindowInsets.systemBars
-        .only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top)
+    val insets =
+        WindowInsets.systemBars
+            .only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top)
 
     Column(modifier = Modifier.fillMaxSize()) {
         ScrollableTabRow(
@@ -50,11 +51,12 @@ fun TabScreen() {
                 SecondaryIndicator(
                     modifier = Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex]),
                     height = 2.dp,
-                    color = MaterialTheme.colorScheme.primary
+                    color = MaterialTheme.colorScheme.primary,
                 )
             },
-            modifier = Modifier
-                .padding(insets.asPaddingValues()) // Apply insets padding
+            modifier =
+                Modifier
+                    .padding(insets.asPaddingValues()), // Apply insets padding
         ) {
             tabs.forEachIndexed { index, title ->
                 Tab(
@@ -65,25 +67,27 @@ fun TabScreen() {
                             text = title,
                             fontWeight = if (selectedTabIndex == index) FontWeight.Bold else FontWeight.Normal,
                             fontSize = 14.sp,
-                            color = if (selectedTabIndex == index) {
-                                MaterialTheme.colorScheme.primary
-                            } else {
-                                MaterialTheme.colorScheme.onSurface
-                            }
+                            color =
+                                if (selectedTabIndex == index) {
+                                    MaterialTheme.colorScheme.primary
+                                } else {
+                                    MaterialTheme.colorScheme.onSurface
+                                },
                         )
                     },
                     unselectedContentColor = Color.Gray,
-                    selectedContentColor = MaterialTheme.colorScheme.primary
+                    selectedContentColor = MaterialTheme.colorScheme.primary,
                 )
             }
         }
 
         // Display content based on selected tab
         Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            contentAlignment = Alignment.Center
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(16.dp),
+            contentAlignment = Alignment.Center,
         ) {
             when (selectedTabIndex) {
                 0 -> SyllabusScreen()
@@ -96,9 +100,6 @@ fun TabScreen() {
         }
     }
 }
-
-
-
 
 @Composable
 fun SettingsScreen() {

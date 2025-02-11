@@ -29,12 +29,12 @@ fun SyllabusScreen() {
             text = "Syllabus",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(bottom = 16.dp)
+            modifier = Modifier.padding(bottom = 16.dp),
         )
 
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
-            state = listState
+            state = listState,
         ) {
             items(books, key = { it.title }) { book ->
                 BookItem(book)
@@ -46,19 +46,21 @@ fun SyllabusScreen() {
 @Composable
 fun BookItem(book: Book) {
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp),
-        verticalAlignment = Alignment.CenterVertically
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp),
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         AsyncImage(
             model = book.imageUrl,
             contentDescription = "Book Cover",
-            modifier = Modifier
-                .size(80.dp)
-                .clip(RoundedCornerShape(8.dp)),
+            modifier =
+                Modifier
+                    .size(80.dp)
+                    .clip(RoundedCornerShape(8.dp)),
             contentScale = ContentScale.Crop,
-            placeholder = rememberAsyncImagePainter(R.drawable.ic_launcher_background) // Placeholder image
+            placeholder = rememberAsyncImagePainter(R.drawable.ic_launcher_background), // Placeholder image
         )
 
         Spacer(modifier = Modifier.width(16.dp))
@@ -70,17 +72,22 @@ fun BookItem(book: Book) {
     }
 }
 
-data class Book(val title: String, val author: String, val imageUrl: String)
+data class Book(
+    val title: String,
+    val author: String,
+    val imageUrl: String,
+)
 
 fun generateBooks(): List<Book> {
-    val dummyImages = listOf(
-        "https://images.unsplash.com/photo-1541963463532-d68292c34b19"
-    )
+    val dummyImages =
+        listOf(
+            "https://images.unsplash.com/photo-1541963463532-d68292c34b19",
+        )
     return List(1020) { index ->
         Book(
             title = "Book Title $index",
             author = "Author $index",
-            imageUrl = dummyImages[index % dummyImages.size]
+            imageUrl = dummyImages[index % dummyImages.size],
         )
     }
 }
