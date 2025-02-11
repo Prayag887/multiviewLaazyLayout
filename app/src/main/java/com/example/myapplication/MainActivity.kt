@@ -4,11 +4,27 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ScrollableTabRow
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRowDefaults.SecondaryIndicator
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
-import androidx.compose.runtime.*
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -56,7 +72,7 @@ fun TabScreen() {
             },
             modifier =
                 Modifier
-                    .padding(insets.asPaddingValues()), // Apply insets padding
+                    .padding(insets.asPaddingValues()),
         ) {
             tabs.forEachIndexed { index, title ->
                 Tab(
@@ -92,18 +108,13 @@ fun TabScreen() {
             when (selectedTabIndex) {
                 0 -> SyllabusScreen()
                 1 -> LiveClassScreen()
-                2 -> SettingsScreen()
+                2 -> VideosScreen()
                 3 -> MessagesScreen()
                 4 -> NotificationsScreen()
                 5 -> MoreScreen()
             }
         }
     }
-}
-
-@Composable
-fun SettingsScreen() {
-    Text("Settings Content", fontSize = 24.sp)
 }
 
 @Composable
